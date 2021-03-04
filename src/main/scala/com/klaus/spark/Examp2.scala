@@ -1,5 +1,7 @@
 package com.klaus.spark
 
+import java.security.cert.PKIXRevocationChecker
+
 import org.apache.spark.{SparkConf, SparkContext}
 
 import scala.collection.mutable.ListBuffer
@@ -45,6 +47,7 @@ object Examp2 {
       data=>{
         accumulator1.add(data)
       }
+
     )
     val map = accumulator1.value
     val list = map.map(_._2).toList

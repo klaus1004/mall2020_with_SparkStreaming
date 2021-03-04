@@ -53,7 +53,7 @@ object MyEsUtil {
   }
 case class Movie(name:String,id:Long)
 
-  def main(args: Array[String]): Unit = {
-    addDoc(Movie("教父2",100),"testindex")
-  }
+//  def main(args: Array[String]): Unit = {
+//    addDoc(Movie("教父2",100),"testindex")
+//  }
 }

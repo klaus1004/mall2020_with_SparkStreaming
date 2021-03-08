@@ -4,6 +4,7 @@ import io.searchbox.client.config.HttpClientConfig
 import io.searchbox.client.{JestClient, JestClientFactory}
 import io.searchbox.core.{Bulk, Index}
 
+//save Daily Active User by redis to elasticsearch
 object MyEsUtil {
 
   var factory : JestClientFactory=null

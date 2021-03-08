@@ -9,7 +9,7 @@ import org.apache.spark.streaming.StreamingContext
 import org.apache.spark.streaming.dstream.InputDStream
 import org.apache.spark.streaming.kafka010.{ConsumerStrategies, KafkaUtils, LocationStrategies}
 
-object MykafkaUtil {
+object MyKafkaUtil {
 
   private val properties: Properties = PropertiesUtil.load("config.properties")
   val broker_list = properties.getProperty("kafka.broker.list")

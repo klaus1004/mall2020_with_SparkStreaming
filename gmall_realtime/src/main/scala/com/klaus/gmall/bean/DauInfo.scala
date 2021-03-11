@@ -10,5 +10,4 @@ case class DauInfo(
                     var hr:String,
                     var mi:String,
                     ts:Long) {
-
 }

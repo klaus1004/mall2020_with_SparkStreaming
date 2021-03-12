@@ -12,8 +12,9 @@ case class OrderDetailWide(var order_detail_id:Long =0L,
                            var benefit_reduce_amount:Double =0D ,
                            var original_total_amount:Double =0D ,
                            var feight_fee:Double=0D,
-                           var final_total_amount: Double =0D ,
-                           var final_detail_amount:Double=0D,
+                           var final_total_amount: Double =0D ,//实付总额
+
+                           var final_detail_amount:Double=0D,//实付分摊
 
                            var if_first_order:String=null,
 

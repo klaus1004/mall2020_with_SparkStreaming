@@ -25,18 +25,18 @@ object OrderDetailApp {
 
     //根据偏移起始点获得数据
     //判断如果之前没有在redis保存，则从kafka最新加载数据
-    var orderInfoInputDstream: InputDStream[ConsumerRecord[String, String]] = null
+    var orderDetailInputDstream: InputDStream[ConsumerRecord[String, String]] = null
     if (orderOffsets != null && orderOffsets.size > 0) {
-      orderInfoInputDstream = MyKafkaUtil.getKafkaStream(topic, ssc, orderOffsets, groupId)
+      orderDetailInputDstream = MyKafkaUtil.getKafkaStream(topic, ssc, orderOffsets, groupId)
     } else {
       println("offset is null")
-      orderInfoInputDstream = MyKafkaUtil.getKafkaStream(topic, ssc, groupId)
+      orderDetailInputDstream = MyKafkaUtil.getKafkaStream(topic, ssc, groupId)
     }
 
     //获得偏移结束点
-    var orderInfoOffsetRanges: Array[OffsetRange] = Array.empty[OffsetRange]
-    val orderInfoInputGetOffsetDstream: DStream[ConsumerRecord[String, String]] = orderInfoInputDstream.transform { rdd =>
-      orderInfoOffsetRanges = rdd.asInstanceOf[HasOffsetRanges].offsetRanges
+    var orderDetailOffsetRanges: Array[OffsetRange] = Array.empty[OffsetRange]
+    val orderInfoInputGetOffsetDstream: DStream[ConsumerRecord[String, String]] = orderDetailInputDstream.transform { rdd =>
+      orderDetailOffsetRanges = rdd.asInstanceOf[HasOffsetRanges].offsetRanges
       rdd
     }
 //封装为样例类流
@@ -118,7 +118,7 @@ object OrderDetailApp {
       Rdd.foreach(orderdetail=>{
         MyKafkaSink.send("DW_ORDER_DETAIL",orderdetail.order_id.toString,JSON.toJSONString(orderdetail,new SerializeConfig(true)))
       })
-      OffsetManager.saveOffset(groupId,topic,orderInfoOffsetRanges)
+      OffsetManager.saveOffset(groupId,topic,orderDetailOffsetRanges)
     })
     ssc.start()
     ssc.awaitTermination()

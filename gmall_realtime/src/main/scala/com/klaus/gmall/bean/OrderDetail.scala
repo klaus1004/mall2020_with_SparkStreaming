@@ -6,7 +6,7 @@ case class OrderDetail(id:Long,
                        order_price:Double,
                        sku_num:Long,
                        sku_name:String,
-                       creat_time:String,
+                       create_time:String,
 
                        var spu_id: Long=0L,
                        var tm_id: Long=0L,
